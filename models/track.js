@@ -15,7 +15,7 @@ class Track {
   }
 
   static fromMany(data) {
-    return data.map((track) => new Track(track));
+    return data?.map((track) => new Track(track)) ?? [];
   }
 }
 
