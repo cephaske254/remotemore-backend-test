@@ -4,18 +4,19 @@ const { Track } = require("../models/track");
 
 class ArtistsService {
   static async getArtistDetails(id) {
-    const { top, artist } = await apigetArtistDetails(id);
+    const { albums, artist, tracks } = await apigetArtistDetails(id);
 
     if (!artist?.id) {
-      throw new Error("Artist not found");
+      return null;
     }
 
     return {
-      top: {
-        ...top,
-        data: Track.fromMany(top.data),
+      tracks: {
+        ...tracks,
+        data: Track.fromMany(tracks.data),
       },
       artist: new ArtistDetail(artist),
+      albums,
     };
   }
 }

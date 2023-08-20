@@ -2,20 +2,22 @@ const api = require("./api");
 
 /**
  * @param {string} id
- *@returns {Promise<{artist: Object, top: Object[]}>}
+ *@returns {Promise<{artist: Object, albums: Object, tracks: Object}>}
  *
  * */
 const apigetArtistDetails = async (id) => {
-  const _artist = api.get(`/artist/${id}`).then((a) => a.data);
-  const _top = api.get(`/artist/${id}/top`).then((a) => a.data);
+  const artist = api.get(`/artist/${id}`).then((a) => a.data);
+  const tracks = api.get(`/artist/${id}/top`).then((a) => a.data);
+  const albums = api.get(`/artist/${id}/albums`).then((a) => a.data);
 
-
-  return await Promise.all([_artist, _top]).then((responses) => {
-    const artist = responses[0]
-    const top = responses[1]
+  return await Promise.all([artist, tracks, albums]).then((responses) => {
+    const artist = responses[0];
+    const tracks = responses[1];
+    const albums = responses[2];
     return {
       artist,
-      top,
+      tracks,
+      albums,
     };
   });
 };
