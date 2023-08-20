@@ -1,4 +1,5 @@
 const { apigetArtistDetails } = require("../api/artists");
+const { Album } = require("../models/album");
 const { ArtistDetail } = require("../models/artist");
 const { Track } = require("../models/track");
 
@@ -16,7 +17,10 @@ class ArtistsService {
         data: Track.fromMany(tracks.data),
       },
       artist: new ArtistDetail(artist),
-      albums,
+      albums: {
+        ...albums,
+        data: Album.fromMany(albums.data),
+      },
     };
   }
 }

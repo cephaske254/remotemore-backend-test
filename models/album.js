@@ -4,12 +4,24 @@ class Album {
       id: data.id,
       title: data.title,
       cover: data.cover_medium,
-      duration: data.duration,
+      stats: new AlbumStats(data),
     };
+  }
+
+  static fromMany(data) {
+    return data?.map((album) => new Album(album)) ?? [];
   }
 }
 
-
+class AlbumStats {
+  constructor(data) {
+    if (!data) return null;
+    return {
+      fans: data.fans,
+      release_date: data.release_date,
+    };
+  }
+}
 
 module.exports = {
   Album,
