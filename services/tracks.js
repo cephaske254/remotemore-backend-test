@@ -1,5 +1,6 @@
 const { apiGetChart } = require("../api/chart");
 const { apiSearchTracks } = require("../api/search");
+const { Album } = require("../models/album");
 const { Track } = require("../models/track");
 
 class TracksService {
@@ -21,6 +22,10 @@ class TracksService {
       tracks: {
         ...data.tracks,
         data: Track.fromMany(data.tracks.data),
+      },
+      albums: {
+        ...data.albums,
+        data: Album.fromMany(data.albums.data),
       },
     };
   }

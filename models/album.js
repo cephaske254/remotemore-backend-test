@@ -5,6 +5,7 @@ class Album {
       title: data.title,
       cover: data.cover_medium,
       stats: new AlbumStats(data),
+      artist: new AlbumArtist(data.artist),
     };
   }
 
@@ -19,6 +20,17 @@ class AlbumStats {
     return {
       fans: data.fans,
       release_date: data.release_date,
+    };
+  }
+}
+
+class AlbumArtist {
+  constructor(data) {
+    if (!data) return null;
+    return {
+      id: data.id,
+      name: data.name,
+      picture: data.picture_medium,
     };
   }
 }
